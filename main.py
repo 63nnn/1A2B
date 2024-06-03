@@ -1,4 +1,5 @@
 import random as r
+import os
 
 
 def game():
@@ -9,31 +10,52 @@ def game():
     history = []
     results = []
     while True:
-        print(f"Now is gamer {gamer_count}'s turn")
+        os.system("cls")  # clear
+        print(f"\nNow is gamer {gamer_count}'s turn")
+        player_history = []
+        player_results = []
+        if round_count > 1:  # no data no output
+            for i in range(gamer_count - 1, (round_count - 1) * gamers, gamers):
+                player_history.append(history[i])
+                player_results.append(results[i])
+        screen(gamer_count, round_count, player_history, player_results)
         while True:
-            guess = input("Guess: ")
-            if not input_check(guess):
+            guess = input("\nGuess: ")
+            if not input_check(guess):  # invalid then guess again
                 print("Invalid")
                 continue
-            if not check_answer(ans=ans, guess=guess):
+            if not check_answer(ans=ans, guess=guess):  # guess not correct
                 history.append(guess)
                 result = check_AB(ans=ans, guess=guess)
                 results.append(result)
-                screen(gamer_count, round_count, history, results)
+                print(f"result: {result}")
+                input("\nPress enter to continue...")
+                break
+            else:  # win
+                print(f"\nThe answer is {ans}.", end="")
+                print(f"Gamer {gamer_count} win.")
+                input("\nPress enter to continue...")
+                break
+        gamer_count += 1  # next gamer
+        if gamer_count > gamers:  # cycle then next round
+            gamer_count -= gamers
+            round_count += 1
 
 
-def screen(gamer, round_count, history, result):
+def screen(gamer, round_count, history, results):
     w = [7, 3, 3, 3, 3, 1, 6]
-    print(f"gamer {gamer}:")
+    print(f"gamer {gamer}: ")
     print()
-    for i in range(0, round_count):
+    if history == [] or results == []:  # no data no output
+        return
+    for i in range(0, round_count - 1):
         print(f"{f'round{i+1}':{w[0]}}|", end="")
         print(f"{f'{history[i][0]}':^{w[1]}}|", end="")
         print(f"{f'{history[i][1]}':^{w[2]}}|", end="")
         print(f"{f'{history[i][2]}':^{w[3]}}|", end="")
         print(f"{f'{history[i][3]}':^{w[4]}}|", end="")
         print(f"{f'':^{w[5]}}", end="")
-        print(f"{f'{result[i]}':^{w[6]}}")
+        print(f"{f'{results[i]}':^{w[6]}}")
 
 
 def input_check(ans):
@@ -61,6 +83,8 @@ def check_AB(ans, guess):
                 guess = guess.replace(j, "_", 1)
                 break
 
+    B_count = B_count - A_count
+
     return f"{A_count}A{B_count}B"
 
 
@@ -79,15 +103,16 @@ def define_answer():
         if mode == "1":
             for _ in range(4):
                 ans += r.choice(pool)
-        if mode == "2":
+        elif mode == "2":
             try:
-                temp = input(":")
+                temp = input("Customize: ")
                 if input_check(temp):
                     ans = temp
             except Exception as e:
                 print()
         else:
             print("Please try again.")
+            continue
         return ans
 
 
@@ -95,7 +120,7 @@ def main():
     while True:
         new = input("[1]: New Game\n[2]: shutdown\n:")
         if new == "1":
-            pass
+            game()
         elif new == "2":
             print("Bye!")
             return
