@@ -33,7 +33,7 @@ def game():
                 break
             else:  # win
                 print(f"\nThe answer is {ans}.", end="")
-                print(f"Gamer {gamer_count} win.")
+                print(f"<< Gamer {gamer_count} win >>")
                 input("\nPress enter to continue...")
                 break
         gamer_count += 1  # next gamer
