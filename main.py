@@ -33,7 +33,7 @@ def game():
             else:  # win
                 print(f"<< Gamer {gamer_count} win >>")
                 input("\nPress enter to continue...")
-                break
+                return
         gamer_count += 1  # next gamer
         if gamer_count > gamers:  # cycle then next round
             gamer_count -= gamers
