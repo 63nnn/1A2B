@@ -10,7 +10,7 @@ def game():
     history = []
     results = []
     while True:
-        os.system("cls")  # clear
+        os.system("cls" if os.name == "nt" else "clear")  # clear
         print(f"\nNow is gamer {gamer_count}'s turn")
         if round_count > 1:  # no data no output
             player_history = []
@@ -44,8 +44,6 @@ def screen(gamer, round_count, history, results):
     w = [7, 3, 3, 3, 3, 1, 6]
     print(f"gamer {gamer}: ")
     print()
-    if history == [] or results == []:  # no data no output
-        return
     for i in range(0, round_count - 1):
         print(f"{f'round{i+1}':{w[0]}}|", end="")
         print(f"{f'{history[i][0]}':^{w[1]}}|", end="")
