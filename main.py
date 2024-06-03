@@ -22,7 +22,6 @@ def game():
         while True:
             guess = input("\nGuess: ")
             if not input_check(guess):  # invalid then guess again
-                print("Invalid")
                 continue
             if not check_answer(ans=ans, guess=guess):  # guess not correct
                 history.append(guess)
@@ -32,7 +31,6 @@ def game():
                 input("\nPress enter to continue...")
                 break
             else:  # win
-                print(f"\nThe answer is {ans}.", end="")
                 print(f"<< Gamer {gamer_count} win >>")
                 input("\nPress enter to continue...")
                 break
