@@ -96,7 +96,7 @@ def check_answer(ans, guess):
 def define_answer():
     while True:
         mode = input("[1]: Random\n[2]: Customize\n:")
-        pool = [str(i) for i in range(11)]
+        pool = [str(i) for i in range(10)]
         ans = ""
         if mode == "1":
             for _ in range(4):
