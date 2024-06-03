@@ -106,6 +106,7 @@ def define_answer():
                     ans = temp
             except Exception as e:
                 print()
+                continue
         else:
             print("Please try again.")
             continue
