@@ -1,7 +1,6 @@
 import random
 
 answer = random.sample(range(1, 10), 4)
-print(answer)
 a = b = n = 0
 while a != 4:
     a = b = n = 0

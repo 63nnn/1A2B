@@ -12,13 +12,13 @@ def game():
     while True:
         os.system("cls")  # clear
         print(f"\nNow is gamer {gamer_count}'s turn")
-        player_history = []
-        player_results = []
         if round_count > 1:  # no data no output
+            player_history = []
+            player_results = []
             for i in range(gamer_count - 1, (round_count - 1) * gamers, gamers):
                 player_history.append(history[i])
                 player_results.append(results[i])
-        screen(gamer_count, round_count, player_history, player_results)
+            screen(gamer_count, round_count, player_history, player_results)
         while True:
             guess = input("\nGuess: ")
             if not input_check(guess):  # invalid then guess again
