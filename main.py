@@ -104,6 +104,9 @@ def define_answer():
                 temp = input("Customize: ")
                 if input_check(temp):
                     ans = temp
+                else:
+                    print("Please try again.")
+                    continue
             except Exception as e:
                 print()
                 continue
